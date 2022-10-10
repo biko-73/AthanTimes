@@ -1,6 +1,12 @@
 <img src="https://i.ibb.co/xJtq07S/athan.png" alt="athan" border="0">
 
+<img src="https://i.ibb.co/9ynZydS/LOGOPlug.png" alt="LOGOPlug" border="0">
+
 # AthanTimes
+
+
+<img src="https://i.ibb.co/xmqKYC9/Demar-Logo.png" alt="Demar-Logo" border="0">
+
 للمطور أبوياسين الجزائري
 واقتبس من كلامه
 فيه العديد من مواقيت الصلاة لعديد المدن
