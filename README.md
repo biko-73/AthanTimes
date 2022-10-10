@@ -1,4 +1,4 @@
-[https://ibb.co/72dt51J](https://i.ibb.co/xJtq07S/athan.png)
+<img src="https://i.ibb.co/xJtq07S/athan.png" alt="athan" border="0">
 
 # AthanTimes
 للمطور أبوياسين الجزائري
