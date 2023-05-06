@@ -1,33 +1,59 @@
 #!/bin/sh
+##############################################################################################################
+##
+## Script Purpose:
+##		Download and install IPK/DEB (Py2/Py3)
+##
+## Command: wget https://raw.githubusercontent.com/biko-73/AthanTimes/main/installer.sh -O - | /bin/sh
+##
+##############################################################################################################
 
-# ==============================================
-# SCRIPT : DOWNLOAD AND INSTALL AthanTimes #
-# =====================================================================================================================
-# Command: wget https://raw.githubusercontent.com/biko-73/AthanTimes/main/installer.sh -O - | /bin/sh #
-# =====================================================================================================================
 
-########################################################################################################################
+##############################################################################################################
 # Plugin	... Enter Manually
-########################################################################################################################
+##############################################################################################################
+
+MY_IPK_PY2="enigma2-plugin-extensions-Athantimes_2.8_PY2.ipk"
+MY_IPK_PY3="enigma2-plugin-extensions-Athantimes_2.8_PY3.ipk"
+
+MY_DEB_PY2="enigma2-plugin-extensions-Athantimes_2.8_DreamOS.deb"
+MY_DEB_PY3=""
 
 PACKAGE_DIR='AthanTimes/main'
 
-MY_IPK="enigma2-plugin-extensions-athantimes_V2.5_all.ipk"
-MY_DEB="enigma2-plugin-extensions-athantimes_V2.2.deb"
-
-########################################################################################################################
+##############################################################################################################
 # Auto ... Do not change
-########################################################################################################################
+##############################################################################################################
+MY_MAIN_URL="https://raw.githubusercontent.com/biko-73/"
+
+PYTHON_VERSION=$(python -c 'import sys; print(sys.version_info[0])')
 
 # Decide : which package ?
-MY_MAIN_URL="https://raw.githubusercontent.com/biko-73/"
 if which dpkg > /dev/null 2>&1; then
-	MY_FILE=$MY_DEB
-	MY_URL=$MY_MAIN_URL$PACKAGE_DIR'/'$MY_DEB
+	if [ "$PYTHON_VERSION" -eq "2" ]; then
+		MY_FILE=$MY_DEB_PY2
+	else
+		MY_FILE=$MY_DEB_PY3
+	fi;
 else
-	MY_FILE=$MY_IPK
-	MY_URL=$MY_MAIN_URL$PACKAGE_DIR'/'$MY_IPK
+	if [ "$PYTHON_VERSION" -eq "2" ]; then
+		MY_FILE=$MY_IPK_PY2
+	else
+		MY_FILE=$MY_IPK_PY3
+	fi;
 fi
+
+# If no suitable package available
+if [ -z "$MY_FILE" ]; then
+	echo ''
+	echo '************************************************************'
+	echo '**          NO Suitable Version Found ON Server           **'
+	echo '************************************************************'
+	echo ''
+	exit 0
+fi
+
+MY_URL=$MY_MAIN_URL$PACKAGE_DIR'/'$MY_FILE
 MY_TMP_FILE="/tmp/"$MY_FILE
 
 echo ''
@@ -35,8 +61,7 @@ echo '************************************************************'
 echo '**                         STARTED                        **'
 echo '************************************************************'
 echo "**                 Uploaded by: Biko_73                   **"
-echo "**    May Allah accept from us and you good deeds         **"
-echo "**  https://www.tunisia-sat.com/forums/threads/3739939/   **"
+echo "**  https://www.tunisia-sat.com/forums/threads/4120814/   **"
 echo "************************************************************"
 echo ''
 
@@ -65,6 +90,9 @@ if [ -f $MY_TMP_FILE ]; then
 		opkg install --force-reinstall $MY_TMP_FILE
 	fi
 	MY_RESULT=$?
+
+	# Remove Installation file
+	rm -f $MY_TMP_FILE > /dev/null 2>&1
 
 	# Result
 	echo ''
